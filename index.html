@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pastalicious - Order Now</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🍝 Pastalicious</h1>
+    <p>Your favorite pasta delivered fresh!</p>
+  </header>
+
+  <section class="menu">
+    <h2>Our Menu</h2>
+    <ul>
+      <li>Spaghetti</li>
+      <li>Fettuccine Alfredo</li>
+      <li>Penne Arrabbiata</li>
+      <li>Mac & Cheese</li>
+      <li>Lasagna</li>
+    </ul>
+  </section>
+
+  <section class="order-form">
+    <h2>Place Your Order</h2>
+    <form id="pastaForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <select id="pastaType" required>
+        <option value="">Choose Pasta</option>
+        <option value="Spaghetti">Spaghetti</option>
+        <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
+        <option value="Penne Arrabbiata">Penne Arrabbiata</option>
+        <option value="Mac & Cheese">Mac & Cheese</option>
+        <option value="Lasagna">Lasagna</option>
+      </select>
+      <input type="number" id="quantity" placeholder="Quantity" min="1" required />
+      <textarea id="address" placeholder="Delivery Address" required></textarea>
+      <button type="submit">Submit Order</button>
+    </form>
+    <p id="confirmationMsg" class="hidden">✅ Order placed successfully!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Pastalicious. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
