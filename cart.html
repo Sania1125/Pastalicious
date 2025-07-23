@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Cart - Pastalicious</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <h1>Pastalicious</h1>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="carbonara.html">Spaghetti Carbonara</a></li>
+      <li><a href="alfredo.html">Fettuccine Alfredo</a></li>
+      <li><a href="cart.html" class="active">Cart</a></li>
+      <li><a href="queries.html">Queries / Help</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="order-section">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+
+      <form id="orderForm" style="display:none;">
+        <label for="deliveryTime">Preferred Delivery Time:</label>
+        <input type="time" id="deliveryTime" required />
+
+        <label for="address">Delivery Address:</label>
+        <textarea id="address" rows="3" placeholder="Enter your delivery address" required></textarea>
+
+        <label>Payment Method:</label>
+        <div class="payment-methods">
+          <label><input type="radio" name="payment" value="Cash on Delivery" checked /> Cash on Delivery</label>
+        </div>
+
+        <button type="submit" class="order-btn">Place Order via WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pastalicious, Multan, Pakistan.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
