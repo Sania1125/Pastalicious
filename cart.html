@@ -2,47 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Cart - Pastalicious</title>
+  <title>Pastalicious Cart</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <h1>Pastalicious</h1>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="carbonara.html">Spaghetti Carbonara</a></li>
-      <li><a href="alfredo.html">Fettuccine Alfredo</a></li>
-      <li><a href="cart.html" class="active">Cart</a></li>
-      <li><a href="queries.html">Queries / Help</a></li>
-    </ul>
-  </nav>
+  <header>
+    <h1>Your Cart</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="queries.html">Help</a>
+    </nav>
+  </header>
 
   <main>
-    <section class="order-section">
-      <h2>Your Cart</h2>
-      <div id="cartItems"></div>
+    <div id="cartItems"></div>
 
-      <form id="orderForm" style="display:none;">
-        <label for="deliveryTime">Preferred Delivery Time:</label>
+    <section class="order-section">
+      <h2>Complete Your Order</h2>
+      <form id="orderForm">
+        <label for="deliveryTime">Delivery Time:</label>
         <input type="time" id="deliveryTime" required />
 
         <label for="address">Delivery Address:</label>
-        <textarea id="address" rows="3" placeholder="Enter your delivery address" required></textarea>
+        <textarea id="address" required></textarea>
 
-        <label>Payment Method:</label>
-        <div class="payment-methods">
-          <label><input type="radio" name="payment" value="Cash on Delivery" checked /> Cash on Delivery</label>
-        </div>
+        <label>Payment:</label>
+        <select name="payment" required>
+          <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
 
-        <button type="submit" class="order-btn">Place Order via WhatsApp</button>
+        <label>Send Order Via:</label>
+        <select name="orderMethod" required>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">Email</option>
+        </select>
+
+        <button type="submit" class="order-btn">Place Order</button>
       </form>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2025 Pastalicious, Multan, Pakistan.</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
