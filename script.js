@@ -5,29 +5,30 @@ document.getElementById("pastaForm").addEventListener("submit", function (e) {
   const pastaType = document.getElementById("pastaType").value;
   const quantity = document.getElementById("quantity").value;
   const address = document.getElementById("address").value.trim();
+  const sendMethod = document.getElementById("sendMethod").value;
 
-  if (!name || !pastaType || !quantity || !address) {
-    alert("Please fill out all fields.");
+  if (!name || !pastaType || !quantity || !address || !sendMethod) {
+    alert("Please fill out all fields and choose a send method.");
     return;
   }
 
-  const order = {
-    name,
-    pastaType,
-    quantity,
-    address,
-    time: new Date().toLocaleString(),
-  };
+  const message = `New Pasta Order 🍝\nName: ${name}\nPasta: ${pastaType}\nQuantity: ${quantity}\nAddress: ${address}`;
 
-  let orders = JSON.parse(localStorage.getItem("orders")) || [];
-  orders.push(order);
-  localStorage.setItem("orders", JSON.stringify(orders));
+  if (sendMethod === "whatsapp") {
+    const phoneNumber = "o3120452699"; // 🔁 Replace with your number
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+  } else if (sendMethod === "email") {
+    const email = "rebiyaismail86@gmail.com"; // 🔁 Replace with your email
+    const subject = "New Pasta Order 🍝";
+    const mailToURL = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    window.location.href = mailToURL;
+  }
 
   document.getElementById("pastaForm").reset();
   document.getElementById("confirmationMsg").classList.remove("hidden");
 
   setTimeout(() => {
     document.getElementById("confirmationMsg").classList.add("hidden");
-  }, 4000);
+  }, 5000);
 });
-
