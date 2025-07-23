@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lasagna Bolognese - Pastalicious</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Lasagna Bolognese</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="carbonara.html">Spaghetti Carbonara</a> |
+      <a href="alfredo.html">Fettuccine Alfredo</a> |
+      <a href="arrabiata.html">Penne Arrabiata</a> |
+      <a href="cart.html">Cart</a> |
+      <a href="queries.html">Queries & Help</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="item-detail">
+      <img src="https://images.unsplash.com/photo-1606312615445-f1229f4d536f?auto=format&fit=crop&w=600&q=80" alt="Lasagna Bolognese" />
+      <h2>Lasagna Bolognese</h2>
+      <p><strong>Description:</strong> Classic layered lasagna with rich Bolognese meat sauce, béchamel, and mozzarella cheese.</p>
+      <p><strong>Ingredients:</strong> Lasagna sheets, ground beef, tomato sauce, béchamel, mozzarella, Parmesan cheese.</p>
+      <p><strong>Price:</strong> PKR 650</p>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" min="1" value="1" />
+
+      <button id="addToCartBtn" class="order-btn">Add to Cart</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
