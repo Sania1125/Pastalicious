@@ -1,297 +1,175 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+// LocalStorage helpers
+function getCart() {
+  return JSON.parse(localStorage.getItem('pastaliciousCart')) || [];
 }
 
-/* Background for all pages */
-body {
-  background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat fixed;
-  background-size: cover;
-  color: #5c2c00;
-  min-height: 100vh;
+function saveCart(cart) {
+  localStorage.setItem('pastaliciousCart', JSON.stringify(cart));
 }
 
-/* Overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 245, 235, 0.85);
-  z-index: -1;
+// Add to Cart button logic on item pages
+const addToCartBtn = document.getElementById('addToCartBtn');
+if (addToCartBtn) {
+  addToCartBtn.addEventListener('click', () => {
+    const quantityInput = document.getElementById('quantity');
+    const quantity = parseInt(quantityInput.value);
+
+    const pageTitle = document.querySelector('h1').innerText.toLowerCase();
+
+    let item = null;
+
+    if (pageTitle.includes('carbonara')) {
+      item = {
+        id: 'carbonara',
+        name: 'Spaghetti Carbonara',
+        price: 550,
+        quantity,
+      };
+    } else if (pageTitle.includes('alfredo')) {
+      item = {
+        id: 'alfredo',
+        name: 'Fettuccine Alfredo',
+        price: 600,
+        quantity,
+      };
+    } else if (pageTitle.includes('arrabiata')) {
+      item = {
+        id: 'arrabiata',
+        name: 'Penne Arrabiata',
+        price: 500,
+        quantity,
+      };
+    } else if (pageTitle.includes('lasagna')) {
+      item = {
+        id: 'lasagna',
+        name: 'Lasagna Bolognese',
+        price: 650,
+        quantity,
+      };
+    }
+
+    if (item) {
+      const cart = getCart();
+
+      const existingIndex = cart.findIndex(ci => ci.id === item.id);
+      if (existingIndex !== -1) {
+        cart[existingIndex].quantity += item.quantity;
+      } else {
+        cart.push(item);
+      }
+
+      saveCart(cart);
+      alert(`${item.name} (${item.quantity}) added to cart.`);
+    }
+  });
 }
 
-/* Navigation */
-nav {
-  background-color: #b34118cc;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
+// On Cart page - display items and handle order submission
+if (window.location.pathname.endsWith('cart.html')) {
+  const cartItemsSection = document.getElementById('cartItems');
+  const orderSection = document.querySelector('.order-section');
+  const orderForm = document.getElementById('orderForm');
 
-nav h1 {
-  font-size: 1.8rem;
-  color: white;
-}
+  function renderCart() {
+    const cart = getCart();
+    if (cart.length === 0) {
+      cartItemsSection.innerHTML = '<p>Your cart is empty.</p>';
+      orderSection.style.display = 'none';
+      return;
+    }
 
-nav ul.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
+    let html = `<table class="cart-table">
+      <thead>
+        <tr><th>Item</th><th>Quantity</th><th>Price</th><th>Total</th><th>Remove</th></tr>
+      </thead><tbody>`;
 
-nav ul.nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
+    let grandTotal = 0;
 
-nav ul.nav-links li a:hover,
-nav ul.nav-links li a.active {
-  color: #f0b765;
-}
+    cart.forEach((item, i) => {
+      const total = item.price * item.quantity;
+      grandTotal += total;
+      html += `<tr>
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>PKR ${item.price}</td>
+        <td>PKR ${total}</td>
+        <td><button data-index="${i}" class="removeBtn">Remove</button></td>
+      </tr>`;
+    });
 
-/* Main content */
-main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 1rem auto 3rem auto;
-  background: #fff3e6cc;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(179, 65, 24, 0.3);
-}
+    html += `</tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align:right;"><strong>Grand Total:</strong></td>
+          <td colspan="2"><strong>PKR ${grandTotal}</strong></td>
+        </tr>
+      </tfoot>
+    </table>`;
 
-/* Intro */
-.intro h2 {
-  text-align: center;
-  color: #b34118;
-  margin-bottom: 1rem;
-}
+    cartItemsSection.innerHTML = html;
+    orderSection.style.display = 'block';
 
-.intro p {
-  max-width: 650px;
-  margin: 0 auto 2rem auto;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #5c2c00;
-}
-
-/* Featured items grid */
-.featured-items h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #b34118;
-}
-
-.items-grid {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.item-card {
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(179,65,24,0.25);
-  width: 300px;
-  padding: 1rem;
-  text-align: center;
-  transition: transform 0.2s ease;
-  color: #5c2c00;
-}
-
-.item-card:hover {
-  transform: scale(1.05);
-}
-
-.item-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.item-card h3 {
-  color: #b34118;
-  margin-bottom: 0.5rem;
-}
-
-.item-card p {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.price {
-  font-weight: 700;
-  color: #b34118;
-  margin-bottom: 1rem;
-}
-
-.btn {
-  background-color: #b34118;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn:hover {
-  background-color: #f0b765;
-  color: #5c2c00;
-}
-
-/* Item detail pages */
-.item-detail {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1rem;
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(179,65,24,0.2);
-  color: #5c2c00;
-}
-
-.item-detail img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-.item-detail h2 {
-  color: #b34118;
-  margin-bottom: 1rem;
-}
-
-.item-detail p {
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: 600;
-  color: #5c2c00;
-}
-
-input[type="number"],
-input[type="time"],
-textarea {
-  width: 100%;
-  padding: 0.4rem 0.6rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  resize: vertical;
-}
-
-/* Cart table */
-.cart-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.5rem;
-  color: #5c2c00;
-}
-
-.cart-table th,
-.cart-table td {
-  border: 1px solid #b34118;
-  padding: 0.75rem;
-  text-align: center;
-}
-
-.cart-table th {
-  background-color: #f0b765;
-}
-
-.order-section {
-  max-width: 650px;
-  margin: 0 auto;
-  padding: 1rem;
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(179,65,24,0.2);
-}
-
-.payment-methods label {
-  font-weight: 600;
-  color: #5c2c00;
-  margin-right: 1rem;
-}
-
-.order-btn {
-  background-color: #b34118;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  font-size: 1.1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.order-btn:hover {
-  background-color: #f0b765;
-  color: #5c2c00;
-}
-
-/* Queries page */
-.queries-section {
-  max-width: 650px;
-  margin: 0 auto;
-  padding: 1rem;
-  background: #fff3e6;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(179,65,24,0.2);
-  color: #5c2c00;
-}
-
-.queries-section h2 {
-  margin-bottom: 1rem;
-  color: #b34118;
-}
-
-.queries-section ul {
-  list-style: none;
-  margin-top: 0.5rem;
-}
-
-.queries-section ul li {
-  margin-bottom: 0.8rem;
-  font-weight: 600;
-}
-
-.queries-section a {
-  color: #b34118;
-  text-decoration: none;
-}
-
-.queries-section a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .items-grid {
-    flex-direction: column;
-    align-items: center;
+    // Add remove button handlers
+    const removeBtns = document.querySelectorAll('.removeBtn');
+    removeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.getAttribute('data-index');
+        let cart = getCart();
+        cart.splice(idx, 1);
+        saveCart(cart);
+        renderCart();
+      });
+    });
   }
+
+  renderCart();
+
+  orderForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const cart = getCart();
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+
+    const deliveryTime = document.getElementById('deliveryTime').value;
+    const address = document.getElementById('address').value.trim();
+    const payment = orderForm.payment.value;
+    const orderMethod = orderForm.orderMethod.value;
+
+    if (!deliveryTime || !address) {
+      alert('Please fill delivery time and address.');
+      return;
+    }
+    let message = 'Pastalicious Order%0A';
+    message += `Delivery Time: ${deliveryTime}%0A`;
+    message += `Delivery Address: ${address}%0A`;
+    message += `Payment Method: ${payment}%0A`;
+    message += 'Order Details:%0A';
+
+    let total = 0;
+    cart.forEach(item => {
+      message += `- ${item.name} x${item.quantity} = PKR ${item.price * item.quantity}%0A`;
+      total += item.price * item.quantity;
+    });
+
+    message += `Total Price: PKR ${total}%0A`;
+    message += 'Thank you for ordering from Pastalicious!';
+
+    // WhatsApp & Email Info
+    const whatsappNumber = '03120452699'; 
+    const email = 'rebiyaismail93@gmail.com'; 
+
+    if (orderMethod === 'whatsapp') {
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(waUrl, '_blank');
+    } else {
+      // Email with subject and body
+      const subject = encodeURIComponent('Pastalicious Order');
+      const body = decodeURIComponent(message.replace(/%0A/g, '\n'));
+      window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    }
+
+    localStorage.removeItem('pastaliciousCart');
+  });
 }
