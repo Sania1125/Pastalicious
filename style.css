@@ -211,4 +211,87 @@ textarea {
 
 .cart-table th,
 .cart-table td {
-  border: 1px
+  border: 1px solid #b34118;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.cart-table th {
+  background-color: #f0b765;
+}
+
+.order-section {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff3e6;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(179,65,24,0.2);
+}
+
+.payment-methods label {
+  font-weight: 600;
+  color: #5c2c00;
+  margin-right: 1rem;
+}
+
+.order-btn {
+  background-color: #b34118;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.order-btn:hover {
+  background-color: #f0b765;
+  color: #5c2c00;
+}
+
+/* Queries page */
+.queries-section {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff3e6;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(179,65,24,0.2);
+  color: #5c2c00;
+}
+
+.queries-section h2 {
+  margin-bottom: 1rem;
+  color: #b34118;
+}
+
+.queries-section ul {
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.queries-section ul li {
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.queries-section a {
+  color: #b34118;
+  text-decoration: none;
+}
+
+.queries-section a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .items-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
