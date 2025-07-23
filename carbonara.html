@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spaghetti Carbonara - Pastalicious</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <h1>Pastalicious</h1>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="carbonara.html" class="active">Spaghetti Carbonara</a></li>
+      <li><a href="alfredo.html">Fettuccine Alfredo</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="queries.html">Queries / Help</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="item-detail">
+      <h2>Spaghetti Carbonara</h2>
+      <img src="https://images.unsplash.com/photo-1601924582975-f63b0d17d48e?auto=format&fit=crop&w=600&q=80" alt="Spaghetti Carbonara" />
+      <p><strong>Description:</strong> A classic Italian pasta dish with creamy sauce made from eggs, cheese, pancetta, and pepper.</p>
+      <p><strong>Ingredients:</strong> Spaghetti, eggs, Parmesan cheese, pancetta, black pepper, olive oil.</p>
+      <p class="price"><strong>Price:</strong> PKR 550</p>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" value="1" min="1" />
+
+      <button id="addToCartBtn" class="btn">Add to Cart</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pastalicious, Multan, Pakistan.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
