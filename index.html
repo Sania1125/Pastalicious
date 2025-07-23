@@ -7,46 +7,73 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🍝 Pastalicious</h1>
-    <p>Your favorite pasta delivered fresh!</p>
-  </header>
+  <div class="bg-overlay">
+    <header>
+      <h1>🍝 Pastalicious</h1>
+      <p>Your favorite pasta delivered fresh from Multan, Pakistan!</p>
+    </header>
 
-  <section class="menu">
-    <h2>Our Menu</h2>
-    <ul>
-      <li>Spaghetti</li>
-      <li>Fettuccine Alfredo</li>
-      <li>Penne Arrabbiata</li>
-      <li>Mac & Cheese</li>
-      <li>Lasagna</li>
-    </ul>
-  </section>
+    <section class="intro">
+      <p>Welcome to <strong>Pastalicious</strong> – where flavor meets tradition. Based in the heart of <strong>Multan</strong>, we serve authentic, freshly made pasta dishes that satisfy every craving. Whether you're hungry at home or treating guests, our quick delivery brings hot pasta to your door.</p>
+      <p>Order now and taste the love in every bite!</p>
+    </section>
 
-  <section class="order-form">
-    <h2>Place Your Order</h2>
-    <form id="pastaForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <select id="pastaType" required>
-        <option value="">Choose Pasta</option>
-        <option value="Spaghetti">Spaghetti</option>
-        <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
-        <option value="Penne Arrabbiata">Penne Arrabbiata</option>
-        <option value="Mac & Cheese">Mac & Cheese</option>
-        <option value="Lasagna">Lasagna</option>
-      </select>
-      <input type="number" id="quantity" placeholder="Quantity" min="1" required />
-      <textarea id="address" placeholder="Delivery Address" required></textarea>
-      <button type="submit">Submit Order</button>
-    </form>
-    <p id="confirmationMsg" class="hidden">✅ Order placed successfully!</p>
-  </section>
+    <section class="menu">
+      <h2>Our Menu</h2>
+      <div class="menu-items">
+        <div class="item">
+          <img src="https://i.imgur.com/5bXgBjs.jpg" alt="Spaghetti">
+          <p>Spaghetti - Rs. 450</p>
+        </div>
+        <div class="item">
+          <img src="https://i.imgur.com/WcM0TzF.jpg" alt="Fettuccine Alfredo">
+          <p>Fettuccine Alfredo - Rs. 500</p>
+        </div>
+        <div class="item">
+          <img src="https://i.imgur.com/OmUjUXC.jpg" alt="Penne Arrabbiata">
+          <p>Penne Arrabbiata - Rs. 480</p>
+        </div>
+        <div class="item">
+          <img src="https://i.imgur.com/kHgMZXa.jpg" alt="Mac & Cheese">
+          <p>Mac & Cheese - Rs. 420</p>
+        </div>
+        <div class="item">
+          <img src="https://i.imgur.com/TPcLR5c.jpg" alt="Lasagna">
+          <p>Lasagna - Rs. 550</p>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Pastalicious. All rights reserved.</p>
-  </footer>
+    <section class="order-form">
+      <h2>Place Your Order</h2>
+      <form id="pastaForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <select id="pastaType" required>
+          <option value="">Choose Pasta</option>
+          <option value="Spaghetti">Spaghetti</option>
+          <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
+          <option value="Penne Arrabbiata">Penne Arrabbiata</option>
+          <option value="Mac & Cheese">Mac & Cheese</option>
+          <option value="Lasagna">Lasagna</option>
+        </select>
+        <input type="number" id="quantity" placeholder="Quantity" min="1" required />
+        <textarea id="address" placeholder="Delivery Address" required></textarea>
+        <label for="sendMethod">Send via:</label>
+        <select id="sendMethod" required>
+          <option value="">Select method</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">Email</option>
+        </select>
+        <button type="submit">Submit Order</button>
+      </form>
+      <p id="confirmationMsg" class="hidden">✅ Order processed! Check your app.</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Pastalicious, Multan. All rights reserved.</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
