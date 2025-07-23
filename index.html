@@ -11,78 +11,45 @@
     <h1>Pastalicious</h1>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="carbonara.html">Carbonara</a></li>
-      <li><a href="alfredo.html">Alfredo</a></li>
-      <li><a href="help.html">Help / Queries</a></li>
+      <li><a href="carbonara.html">Spaghetti Carbonara</a></li>
+      <li><a href="alfredo.html">Fettuccine Alfredo</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="queries.html">Queries / Help</a></li>
     </ul>
   </nav>
 
-  <header class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h2>Welcome to Pastalicious</h2>
-      <p>Delicious pasta in the heart of Multan, Pakistan</p>
-    </div>
-  </header>
-
   <main>
-    <section class="featured-items">
-      <h2>Our Specials</h2>
-      <div class="items-grid">
-        <!-- Carbonara Card -->
-        <div class="item-card">
-          <img src="images/carbonara.jpg" alt="Spaghetti Carbonara" />
-          <h3>Spaghetti Carbonara</h3>
-          <p>Classic Italian pasta with creamy egg sauce, pancetta, and parmesan.</p>
-          <p class="price">PKR 550</p>
-          <a href="carbonara.html" class="btn">View Details</a>
-        </div>
-        <!-- Alfredo Card -->
-        <div class="item-card">
-          <img src="images/alfredo.jpg" alt="Fettuccine Alfredo" />
-          <h3>Fettuccine Alfredo</h3>
-          <p>Rich and creamy Alfredo sauce over perfectly cooked fettuccine pasta.</p>
-          <p class="price">PKR 600</p>
-          <a href="alfredo.html" class="btn">View Details</a>
-        </div>
-      </div>
+    <section class="intro">
+      <h2>Welcome to Pastalicious</h2>
+      <p>Located in the heart of Multan, Pakistan, Pastalicious offers authentic, delicious pasta crafted with love and fresh ingredients. Experience the taste of Italy with a local touch!</p>
     </section>
 
-    <section class="order-section">
-      <h2>Place Your Order</h2>
-      <form id="orderForm">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required />
+    <section class="featured-items">
+      <h2>Our Pasta Specials</h2>
+      <div class="items-grid">
 
-        <label for="item">Select Item:</label>
-        <select id="item" name="item" required>
-          <option value="">-- Choose a Pasta --</option>
-          <option value="Spaghetti Carbonara">Spaghetti Carbonara</option>
-          <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
-        </select>
-
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
-
-        <label for="deliveryTime">Preferred Delivery Time:</label>
-        <input type="time" id="deliveryTime" name="deliveryTime" required />
-
-        <label for="address">Delivery Address:</label>
-        <textarea id="address" name="address" rows="3" required></textarea>
-
-        <label>Payment Method:</label>
-        <div class="payment-methods">
-          <input type="radio" id="cod" name="payment" value="Cash on Delivery" checked />
-          <label for="cod">Cash on Delivery</label>
+        <div class="item-card">
+          <img src="https://images.unsplash.com/photo-1601924582975-f63b0d17d48e?auto=format&fit=crop&w=600&q=80" alt="Spaghetti Carbonara" />
+          <h3>Spaghetti Carbonara</h3>
+          <p>A classic Italian pasta with creamy sauce, pancetta, and parmesan.</p>
+          <p class="price">PKR 550</p>
+          <a href="carbonara.html" class="btn">See Details</a>
         </div>
 
-        <button type="submit" class="btn order-btn">Order Now</button>
-      </form>
+        <div class="item-card">
+          <img src="https://images.unsplash.com/photo-1601924629008-5b5ab9dbb33e?auto=format&fit=crop&w=600&q=80" alt="Fettuccine Alfredo" />
+          <h3>Fettuccine Alfredo</h3>
+          <p>Rich and creamy Alfredo sauce tossed with tender fettuccine pasta.</p>
+          <p class="price">PKR 600</p>
+          <a href="alfredo.html" class="btn">See Details</a>
+        </div>
+
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Pastalicious &copy; 2025 | Based in Multan, Pakistan</p>
+    <p>&copy; 2025 Pastalicious, Multan, Pakistan. All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>
