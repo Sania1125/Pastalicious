@@ -1,4 +1,4 @@
-
+// LocalStorage helpers
 function getCart() {
   return JSON.parse(localStorage.getItem('pastaliciousCart')) || [];
 }
@@ -14,8 +14,7 @@ if (addToCartBtn) {
     const quantityInput = document.getElementById('quantity');
     const quantity = parseInt(quantityInput.value);
 
-    // Get current page to know which item is added
-    const pageTitle = document.querySelector('h2').innerText.toLowerCase();
+    const pageTitle = document.querySelector('h1').innerText.toLowerCase();
 
     let item = null;
 
@@ -33,12 +32,25 @@ if (addToCartBtn) {
         price: 600,
         quantity,
       };
+    } else if (pageTitle.includes('arrabiata')) {
+      item = {
+        id: 'arrabiata',
+        name: 'Penne Arrabiata',
+        price: 500,
+        quantity,
+      };
+    } else if (pageTitle.includes('lasagna')) {
+      item = {
+        id: 'lasagna',
+        name: 'Lasagna Bolognese',
+        price: 650,
+        quantity,
+      };
     }
 
     if (item) {
       const cart = getCart();
 
-      // Check if item already in cart
       const existingIndex = cart.findIndex(ci => ci.id === item.id);
       if (existingIndex !== -1) {
         cart[existingIndex].quantity += item.quantity;
@@ -47,65 +59,73 @@ if (addToCartBtn) {
       }
 
       saveCart(cart);
-      alert(`${item.name} added to cart!`);
+      alert(`${item.name} (${item.quantity}) added to cart.`);
     }
   });
 }
 
-// On Cart page: display cart and handle order form
-const cartItemsDiv = document.getElementById('cartItems');
-const orderForm = document.getElementById('orderForm');
+// On Cart page - display items and handle order submission
+if (window.location.pathname.endsWith('cart.html')) {
+  const cartItemsSection = document.getElementById('cartItems');
+  const orderSection = document.querySelector('.order-section');
+  const orderForm = document.getElementById('orderForm');
 
-if (cartItemsDiv) {
-  const cart = getCart();
+  function renderCart() {
+    const cart = getCart();
+    if (cart.length === 0) {
+      cartItemsSection.innerHTML = '<p>Your cart is empty.</p>';
+      orderSection.style.display = 'none';
+      return;
+    }
 
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = '<p>Your cart is empty. <a href="index.html">Go order some delicious pasta!</a></p>';
-  } else {
-    // Show cart items in table
-    let tableHTML = `<table class="cart-table">
+    let html = `<table class="cart-table">
       <thead>
-        <tr>
-          <th>Item</th><th>Price (PKR)</th><th>Quantity</th><th>Total (PKR)</th><th>Remove</th>
-        </tr>
+        <tr><th>Item</th><th>Quantity</th><th>Price</th><th>Total</th><th>Remove</th></tr>
       </thead><tbody>`;
 
-    cart.forEach((item, index) => {
-      tableHTML += `
-        <tr>
-          <td>${item.name}</td>
-          <td>${item.price}</td>
-          <td>${item.quantity}</td>
-          <td>${item.price * item.quantity}</td>
-          <td><button class="remove-btn" data-index="${index}">X</button></td>
-        </tr>`;
+    let grandTotal = 0;
+
+    cart.forEach((item, i) => {
+      const total = item.price * item.quantity;
+      grandTotal += total;
+      html += `<tr>
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>PKR ${item.price}</td>
+        <td>PKR ${total}</td>
+        <td><button data-index="${i}" class="removeBtn">Remove</button></td>
+      </tr>`;
     });
 
-    tableHTML += '</tbody></table>';
+    html += `</tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align:right;"><strong>Grand Total:</strong></td>
+          <td colspan="2"><strong>PKR ${grandTotal}</strong></td>
+        </tr>
+      </tfoot>
+    </table>`;
 
-    // Show total sum
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    tableHTML += `<p><strong>Total Amount: PKR ${total}</strong></p>`;
+    cartItemsSection.innerHTML = html;
+    orderSection.style.display = 'block';
 
-    cartItemsDiv.innerHTML = tableHTML;
-    orderForm.style.display = 'block';
-
-    const removeButtons = document.querySelectorAll('.remove-btn');
-    removeButtons.forEach(btn => {
+    // Add remove button handlers
+    const removeBtns = document.querySelectorAll('.removeBtn');
+    removeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const index = parseInt(btn.getAttribute('data-index'));
-        cart.splice(index, 1);
+        const idx = btn.getAttribute('data-index');
+        let cart = getCart();
+        cart.splice(idx, 1);
         saveCart(cart);
-        location.reload();
+        renderCart();
       });
     });
   }
-}
 
-if (orderForm) {
-  orderForm.addEventListener('submit', (e) => {
+  renderCart();
+
+  orderForm.addEventListener('submit', e => {
     e.preventDefault();
-
     const cart = getCart();
     if (cart.length === 0) {
       alert('Your cart is empty!');
@@ -114,30 +134,42 @@ if (orderForm) {
 
     const deliveryTime = document.getElementById('deliveryTime').value;
     const address = document.getElementById('address').value.trim();
-    const payment = document.querySelector('input[name="payment"]:checked').value;
+    const payment = orderForm.payment.value;
+    const orderMethod = orderForm.orderMethod.value;
 
     if (!deliveryTime || !address) {
-      alert('Please fill all required fields.');
+      alert('Please fill delivery time and address.');
       return;
     }
+    let message = 'Pastalicious Order%0A';
+    message += `Delivery Time: ${deliveryTime}%0A`;
+    message += `Delivery Address: ${address}%0A`;
+    message += `Payment Method: ${payment}%0A`;
+    message += 'Order Details:%0A';
 
-   
-    let message = `*Pastalicious Order*\n\nItems:\n`;
+    let total = 0;
     cart.forEach(item => {
-      message += `- ${item.name} x${item.quantity} = PKR ${item.price * item.quantity}\n`;
+      message += `- ${item.name} x${item.quantity} = PKR ${item.price * item.quantity}%0A`;
+      total += item.price * item.quantity;
     });
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    message += `\nTotal: PKR ${total}\n`;
-    message += `Delivery Time: ${deliveryTime}\n`;
-    message += `Delivery Address: ${address}\n`;
-    message += `Payment Method: ${payment}\n\nThank you for your order!`;
 
-    const waNumber = '03120452699'; 
-    const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    message += `Total Price: PKR ${total}%0A`;
+    message += 'Thank you for ordering from Pastalicious!';
 
-  
+    // WhatsApp & Email Info
+    const whatsappNumber = '03120452699'; 
+    const email = 'rebiyaismail93@gmail.com'; 
+
+    if (orderMethod === 'whatsapp') {
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(waUrl, '_blank');
+    } else {
+      // Email with subject and body
+      const subject = encodeURIComponent('Pastalicious Order');
+      const body = decodeURIComponent(message.replace(/%0A/g, '\n'));
+      window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    }
+
     localStorage.removeItem('pastaliciousCart');
-    alert('Redirecting to WhatsApp to place your order.');
-    window.open(waLink, '_blank');
   });
 }
