@@ -2,77 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pastalicious - Order Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pastalicious - Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay">
-    <header>
-      <h1>🍝 Pastalicious</h1>
-      <p>Your favorite pasta delivered fresh from Multan, Pakistan!</p>
-    </header>
+  <nav>
+    <h1>Pastalicious</h1>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="carbonara.html">Carbonara</a></li>
+      <li><a href="alfredo.html">Alfredo</a></li>
+      <li><a href="help.html">Help / Queries</a></li>
+    </ul>
+  </nav>
 
-    <section class="intro">
-      <p>Welcome to <strong>Pastalicious</strong> – where flavor meets tradition. Based in the heart of <strong>Multan</strong>, we serve authentic, freshly made pasta dishes that satisfy every craving. Whether you're hungry at home or treating guests, our quick delivery brings hot pasta to your door.</p>
-      <p>Order now and taste the love in every bite!</p>
-    </section>
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h2>Welcome to Pastalicious</h2>
+      <p>Delicious pasta in the heart of Multan, Pakistan</p>
+    </div>
+  </header>
 
-    <section class="menu">
-      <h2>Our Menu</h2>
-      <div class="menu-items">
-        <div class="item">
-          <img src="https://i.imgur.com/5bXgBjs.jpg" alt="Spaghetti">
-          <p>Spaghetti - Rs. 450</p>
+  <main>
+    <section class="featured-items">
+      <h2>Our Specials</h2>
+      <div class="items-grid">
+        <!-- Carbonara Card -->
+        <div class="item-card">
+          <img src="images/carbonara.jpg" alt="Spaghetti Carbonara" />
+          <h3>Spaghetti Carbonara</h3>
+          <p>Classic Italian pasta with creamy egg sauce, pancetta, and parmesan.</p>
+          <p class="price">PKR 550</p>
+          <a href="carbonara.html" class="btn">View Details</a>
         </div>
-        <div class="item">
-          <img src="https://i.imgur.com/WcM0TzF.jpg" alt="Fettuccine Alfredo">
-          <p>Fettuccine Alfredo - Rs. 500</p>
-        </div>
-        <div class="item">
-          <img src="https://i.imgur.com/OmUjUXC.jpg" alt="Penne Arrabbiata">
-          <p>Penne Arrabbiata - Rs. 480</p>
-        </div>
-        <div class="item">
-          <img src="https://i.imgur.com/kHgMZXa.jpg" alt="Mac & Cheese">
-          <p>Mac & Cheese - Rs. 420</p>
-        </div>
-        <div class="item">
-          <img src="https://i.imgur.com/TPcLR5c.jpg" alt="Lasagna">
-          <p>Lasagna - Rs. 550</p>
+        <!-- Alfredo Card -->
+        <div class="item-card">
+          <img src="images/alfredo.jpg" alt="Fettuccine Alfredo" />
+          <h3>Fettuccine Alfredo</h3>
+          <p>Rich and creamy Alfredo sauce over perfectly cooked fettuccine pasta.</p>
+          <p class="price">PKR 600</p>
+          <a href="alfredo.html" class="btn">View Details</a>
         </div>
       </div>
     </section>
 
-    <section class="order-form">
+    <section class="order-section">
       <h2>Place Your Order</h2>
-      <form id="pastaForm">
-        <input type="text" id="name" placeholder="Your Name" required />
-        <select id="pastaType" required>
-          <option value="">Choose Pasta</option>
-          <option value="Spaghetti">Spaghetti</option>
-          <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
-          <option value="Penne Arrabbiata">Penne Arrabbiata</option>
-          <option value="Mac & Cheese">Mac & Cheese</option>
-          <option value="Lasagna">Lasagna</option>
-        </select>
-        <input type="number" id="quantity" placeholder="Quantity" min="1" required />
-        <textarea id="address" placeholder="Delivery Address" required></textarea>
-        <label for="sendMethod">Send via:</label>
-        <select id="sendMethod" required>
-          <option value="">Select method</option>
-          <option value="whatsapp">WhatsApp</option>
-          <option value="email">Email</option>
-        </select>
-        <button type="submit">Submit Order</button>
-      </form>
-      <p id="confirmationMsg" class="hidden">✅ Order processed! Check your app.</p>
-    </section>
+      <form id="orderForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required />
 
-    <footer>
-      <p>&copy; 2025 Pastalicious, Multan. All rights reserved.</p>
-    </footer>
-  </div>
+        <label for="item">Select Item:</label>
+        <select id="item" name="item" required>
+          <option value="">-- Choose a Pasta --</option>
+          <option value="Spaghetti Carbonara">Spaghetti Carbonara</option>
+          <option value="Fettuccine Alfredo">Fettuccine Alfredo</option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+
+        <label for="deliveryTime">Preferred Delivery Time:</label>
+        <input type="time" id="deliveryTime" name="deliveryTime" required />
+
+        <label for="address">Delivery Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <label>Payment Method:</label>
+        <div class="payment-methods">
+          <input type="radio" id="cod" name="payment" value="Cash on Delivery" checked />
+          <label for="cod">Cash on Delivery</label>
+        </div>
+
+        <button type="submit" class="btn order-btn">Order Now</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Pastalicious &copy; 2025 | Based in Multan, Pakistan</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
