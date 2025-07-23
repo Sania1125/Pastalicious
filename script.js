@@ -1,6 +1,4 @@
-// Script to handle Add to Cart and Cart page functions
 
-// Helpers to get and set cart in localStorage
 function getCart() {
   return JSON.parse(localStorage.getItem('pastaliciousCart')) || [];
 }
@@ -92,7 +90,6 @@ if (cartItemsDiv) {
     cartItemsDiv.innerHTML = tableHTML;
     orderForm.style.display = 'block';
 
-    // Remove item event
     const removeButtons = document.querySelectorAll('.remove-btn');
     removeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -105,7 +102,6 @@ if (cartItemsDiv) {
   }
 }
 
-// Handle order form submission (WhatsApp message)
 if (orderForm) {
   orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -125,7 +121,7 @@ if (orderForm) {
       return;
     }
 
-    // Build order summary message
+   
     let message = `*Pastalicious Order*\n\nItems:\n`;
     cart.forEach(item => {
       message += `- ${item.name} x${item.quantity} = PKR ${item.price * item.quantity}\n`;
@@ -136,11 +132,10 @@ if (orderForm) {
     message += `Delivery Address: ${address}\n`;
     message += `Payment Method: ${payment}\n\nThank you for your order!`;
 
-    // WhatsApp link - replace with your WhatsApp number (country code + number, no +)
-    const waNumber = '923001234567'; // change this to your WhatsApp number
+    const waNumber = '03120452699'; 
     const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
-    // Clear cart and redirect
+  
     localStorage.removeItem('pastaliciousCart');
     alert('Redirecting to WhatsApp to place your order.');
     window.open(waLink, '_blank');
