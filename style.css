@@ -12,17 +12,60 @@ body {
   padding-bottom: 40px;
 }
 
-/* ✅ Home page background (for index.html only) */
+/* ===== 🎨 PAGE-SPECIFIC BACKGROUNDS ===== */
+
 body.home-page {
   background: url("images/home-bg.jpg") no-repeat center center fixed;
   background-size: cover;
-  background-color: #fff7e6; /* fallback color */
+  background-color: #fff7e6;
   backdrop-filter: blur(3px);
 }
 
-/* Header */
+body.carbonara-page {
+  background: url("images/carbonara-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fff5e6;
+  backdrop-filter: blur(3px);
+}
+
+body.alfredo-page {
+  background: url("images/alfredo-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fef6eb;
+  backdrop-filter: blur(3px);
+}
+
+body.arrabiata-page {
+  background: url("images/arrabiata-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fff3f0;
+  backdrop-filter: blur(3px);
+}
+
+body.lasagna-page {
+  background: url("images/lasagna-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fffaf0;
+  backdrop-filter: blur(3px);
+}
+
+body.cart-page {
+  background: url("images/cart-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #f9f5ef;
+  backdrop-filter: blur(3px);
+}
+
+body.queries-page {
+  background: url("images/queries-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fffbe9;
+  backdrop-filter: blur(3px);
+}
+
+/* ===== 🔝 HEADER ===== */
 header {
-  background-color: #5c4033cc; /* semi-transparent dark brown */
+  background-color: #5c4033cc;
   color: #fff;
   text-align: center;
   padding: 30px 10px;
@@ -41,12 +84,12 @@ nav a {
   font-size: 1rem;
 }
 
-/* Main Layout */
+/* ===== 📦 MAIN ===== */
 main {
   padding: 20px;
 }
 
-/* Homepage - Item Grid */
+/* ===== 🏠 HOMEPAGE ITEM GRID ===== */
 .items-grid {
   display: flex;
   flex-wrap: wrap;
@@ -88,7 +131,7 @@ main {
   color: #4b2e2e;
 }
 
-/* Buttons */
+/* ===== 🧡 BUTTONS ===== */
 .order-btn {
   background-color: #8b5e3c;
   color: white;
@@ -107,7 +150,7 @@ main {
   background-color: #6e4c2e;
 }
 
-/* Item Detail Page */
+/* ===== 🍝 ITEM DETAIL PAGES ===== */
 .item-detail {
   background-color: #fffaf3;
   max-width: 700px;
@@ -124,7 +167,7 @@ main {
   margin-bottom: 15px;
 }
 
-/* Cart Table */
+/* ===== 🛒 CART TABLE ===== */
 .cart-table {
   width: 90%;
   max-width: 800px;
@@ -148,7 +191,7 @@ main {
   color: #5c4033;
 }
 
-/* Forms */
+/* ===== ✍️ FORMS ===== */
 textarea,
 input,
 select {
@@ -160,7 +203,7 @@ select {
   font-size: 1rem;
 }
 
-/* Order Section */
+/* ===== 📦 ORDER SECTION ===== */
 .order-section {
   background-color: #fffaf3;
   padding: 25px;
@@ -170,7 +213,7 @@ select {
   box-shadow: 0 4px 10px rgba(80, 45, 0, 0.2);
 }
 
-/* Queries Page */
+/* ===== ❓ QUERIES PAGE ===== */
 .queries {
   background-color: #fffaf3;
   padding: 25px;
