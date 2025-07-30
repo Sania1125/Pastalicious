@@ -7,14 +7,20 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f7f1e1;
   color: #4b2e2e;
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8ju1NBs5SU-6JLqM5u_HPcDRKNaTrfyx5Q&s')
-  background-attachment: fixed;
-  backdrop-filter: blur(3px);
+  background-color: #f7f1e1;
   padding-bottom: 40px;
 }
 
+/* ✅ Home page background (for index.html only) */
+body.home-page {
+  background: url("images/home-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fff7e6; /* fallback color */
+  backdrop-filter: blur(3px);
+}
+
+/* Header */
 header {
   background-color: #5c4033cc; /* semi-transparent dark brown */
   color: #fff;
@@ -35,11 +41,12 @@ nav a {
   font-size: 1rem;
 }
 
+/* Main Layout */
 main {
   padding: 20px;
 }
 
-/* Item Grid on Homepage */
+/* Homepage - Item Grid */
 .items-grid {
   display: flex;
   flex-wrap: wrap;
@@ -129,7 +136,8 @@ main {
   box-shadow: 0 4px 10px rgba(80, 45, 0, 0.2);
 }
 
-.cart-table th, .cart-table td {
+.cart-table th,
+.cart-table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #e0c9a6;
@@ -141,7 +149,9 @@ main {
 }
 
 /* Forms */
-textarea, input, select {
+textarea,
+input,
+select {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -150,6 +160,7 @@ textarea, input, select {
   font-size: 1rem;
 }
 
+/* Order Section */
 .order-section {
   background-color: #fffaf3;
   padding: 25px;
